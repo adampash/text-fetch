@@ -24,15 +24,19 @@ class Article
       images: article.images
     }
     if opts[:format] == 'markdown'
-      response[:text][:markdown] = ReverseMarkdown.convert(clean text)
+      response[:text][:markdown] = markdownify text
     else
       response[:text][:html] = clean text
     end
     response
   end
 
+  def self.markdownify(text)
+    ReverseMarkdown.convert(clean text).strip
+  end
+
   def self.clean(html)
-    html.gsub(/[\s]+/, ' ')
+    html.gsub(/[\s]+/, ' ').strip
   end
 
   private

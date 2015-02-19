@@ -24,8 +24,17 @@ describe Article do
   end
 
   it "strips out tabs and line breaks from html" do
-    html = "<p>This
+    html = "\n\n<p>This\n\t
       is          some text</p>"
     expect(Article.clean(html)).to eq "<p>This is some text</p>"
+  end
+
+  it "converts to markdown as expected" do
+    html = "\n\n<h1>This is a headline</h1><p>This\n\t
+      is          some text</p>"
+    expect(Article.markdownify(html)).to eq "# This is a headline\n\nThis is some text"
+
+    # html = "This is a headline and <a href=\"http://example.com\">here is text </a>okay?"
+    # expect(Article.markdownify(html)).to eq "This is a headline and [here is text ](http://example.com)okay?"
   end
 end
