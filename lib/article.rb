@@ -26,7 +26,7 @@ class Article
     if opts[:format] == 'markdown'
       response[:text][:markdown] = ReverseMarkdown.convert(clean text)
     else
-      response[:text][:html] = text
+      response[:text][:html] = clean text
     end
     response
   end
