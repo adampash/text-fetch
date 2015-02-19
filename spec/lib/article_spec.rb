@@ -22,4 +22,10 @@ describe Article do
       expect(article[:images].length).to eq 1
     end
   end
+
+  it "strips out tabs and line breaks from html" do
+    html = "<p>This
+      is          some text</p>"
+    expect(Article.clean(html)).to eq "<p>This is some text</p>"
+  end
 end
