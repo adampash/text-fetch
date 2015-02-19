@@ -9,7 +9,7 @@ class Article
       get(url),
       {
         remove_empty_nodes: true,
-        tags: %w(p div a img ul ol li blockquote table tr td),
+        tags: %w(p div a img ul ol li blockquote table tr td h1 h2 h3 h4 h5),
         :attributes => %w(src href),
         blacklist: '#read-only-warning'
       }
