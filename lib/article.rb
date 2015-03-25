@@ -6,7 +6,7 @@ class Article
   def self.fetch(url, opts={})
     opts[:format] = opts[:format] || 'markdown'
     article = Readability::Document.new(
-      get(url),
+      get(url, opts[:selector]),
       {
         remove_empty_nodes: true,
         tags: %w(p div a img ul ol li blockquote table tr td h1 h2 h3 h4 h5),
@@ -40,9 +40,10 @@ class Article
   end
 
   private
-  def self.get(url)
+  def self.get(url, selector=nil)
     agent = Mechanize.new
     page = agent.get url
+    page = page.at(selector) unless selector.nil?
     page.content
   end
 

@@ -23,6 +23,19 @@ describe Article do
     end
   end
 
+  it "takes a URL and selector and returns that article/text" do
+    VCR.use_cassette("selector_fetch") do
+      article = Article.fetch("http://www.tedcruz.org/record/our-standard-the-constitution/", selector: ".box.record")
+
+      expect(
+        article[:text][:markdown].split(" ")[0...2].join(" ")
+      ).to eq "Our Standard:"
+      expect(article[:title]).to eq(nil)
+      expect(article[:hash]).to eq "a35cd5b8256cc985454c98c643725d00"
+      expect(article[:author]).to eq nil
+    end
+  end
+
   it "strips out tabs and line breaks from html" do
     html = "\n\n<p>This\n\t
       is          some text</p>"
