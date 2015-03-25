@@ -1,6 +1,12 @@
 require 'sinatra'
 require 'json'
+require 'sinatra/cross_origin'
+
 require_relative './lib/article'
+
+configure do
+  enable :cross_origin
+end
 
 post '/' do
   # puts params

@@ -25,7 +25,7 @@ describe Article do
 
   it "takes a URL and selector and returns that article/text" do
     VCR.use_cassette("selector_fetch") do
-      article = Article.fetch("http://www.tedcruz.org/record/our-standard-the-constitution/", selector: ".box.record")
+      article = Article.fetch("http://www.tedcruz.org/record/our-standard-the-constitution/", selector: "html body div div section div div div div div.box.record")
 
       expect(
         article[:text][:markdown].split(" ")[0...2].join(" ")

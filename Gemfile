@@ -6,6 +6,7 @@ gem 'puma'
 gem 'ruby-readability'
 gem 'reverse_markdown'
 gem 'fastimage'
+gem "sinatra-cross_origin", "~> 0.3.1"
 
 # mechanize to accept cookies/follow redirects
 gem 'mechanize'
