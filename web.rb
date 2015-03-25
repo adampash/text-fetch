@@ -14,7 +14,7 @@ post '/' do
   puts params
   Article.fetch(params["url"], {
     format: params["format"],
-    selector: params[:selector]
+    selector: params["selector"]
   }).to_json
 end
 
