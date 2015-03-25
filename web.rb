@@ -11,7 +11,7 @@ end
 post '/' do
   # puts params
   # params = JSON.parse(request.body.read)
-  # puts params
+  puts params
   Article.fetch(params["url"], {
     format: params["format"],
     selector: params[:selector]
