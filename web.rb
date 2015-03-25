@@ -12,7 +12,10 @@ post '/' do
   # puts params
   # params = JSON.parse(request.body.read)
   # puts params
-  # Article.fetch(params["url"], {format: params["format"]}).to_json
+  Article.fetch(params["url"], {
+    format: params["format"],
+    selector: params[:selector]
+  }).to_json
 end
 
 post '/check' do
