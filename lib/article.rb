@@ -5,32 +5,7 @@ require 'textract'
 
 class Article
   def self.fetch(url, opts={})
-    article = Textract.get_text(url, opts[:selector])
-    # opts[:format] = opts[:format] || 'markdown'
-    # article = Readability::Document.new(
-    #   get(url, opts[:selector]),
-    #   {
-    #     remove_empty_nodes: true,
-    #     tags: %w(p div a img ul ol li blockquote table tr td h1 h2 h3 h4 h5),
-    #     :attributes => %w(src href),
-    #     blacklist: '#read-only-warning'
-    #   }
-    # )
-    # text = article.content
-    # response = {
-    #   title: article.title,
-    #   text: {
-    #   },
-    #   hash: generate_hash(text),
-    #   author: article.author,
-    #   images: article.images
-    # }
-    # if opts[:format] == 'markdown'
-    #   response[:text][:markdown] = markdownify text
-    # else
-    #   response[:text][:html] = clean text
-    # end
-    # response
+    Textract.get_text(url, opts[:selector])
   end
 
   def self.markdownify(text)
