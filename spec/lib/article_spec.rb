@@ -11,15 +11,15 @@ describe Article do
     VCR.use_cassette("post_fetch") do
       article = Article.fetch("http://gawker.com/1686159467")
 
-      expect(
-        article[:text][:markdown].split(" ")[0...2].join(" ")
-      ).to eq "It's difficult,"
-      expect(article[:title]).to eq(
+      expect(article.text.split(" ")[0...2].join(" ")).to eq "It's difficult,"
+      expect(article.title).to eq(
         "Who Has More Clout at NYC's Top Restaurants: Brian Williams or Geraldo?"
       )
-      expect(article[:hash]).to eq "b109392644602167b1c127d77282534d"
-      expect(article[:author]).to eq "Alex Pareene"
-      expect(article[:images].length).to eq 1
+      # puts article.text
+      # require 'pry'; binding.pry
+      expect(article.md5).to eq "a84d280cd9ddff5da26c4ba2c676532f"
+      expect(article.author).to eq "Alex Pareene"
+      # expect(article[:images].length).to eq 1
     end
   end
 
@@ -28,11 +28,13 @@ describe Article do
       article = Article.fetch("http://www.tedcruz.org/record/our-standard-the-constitution/", selector: "html body div div section div div div div div.box.record")
 
       expect(
-        article[:text][:markdown].split(" ")[0...2].join(" ")
-      ).to eq "Our Standard:"
-      expect(article[:title]).to eq(nil)
-      expect(article[:hash]).to eq "a35cd5b8256cc985454c98c643725d00"
-      expect(article[:author]).to eq nil
+        # article[:text][:markdown].split(" ")[0...2].join(" ")
+        article.text.split(" ")[0...2].join(" ")
+      ).to eq "## Our"
+      expect(article.title).to eq("Our Standard: The Constitution - Ted Cruz")
+      puts article.text
+      expect(article.md5).to eq "ee9e1f96c1ba3ae9a4dc45cf7d0a0719"
+      expect(article.author).to eq nil
     end
   end
 
