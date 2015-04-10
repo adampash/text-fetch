@@ -5,7 +5,7 @@ require 'textract'
 
 class Article
   def self.fetch(url, opts={})
-    Textract.get_text(url, opts[:selector])
+    Textract.get_text(url, opts[:selector], opts[:format])
   end
 
   def self.markdownify(text)

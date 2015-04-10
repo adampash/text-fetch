@@ -9,21 +9,18 @@ configure do
 end
 
 post '/' do
-  # puts params
-  # params = JSON.parse(request.body.read)
   puts params
-  Article.fetch(params["url"], {
+  article = Article.fetch(params["url"], {
     format: params["format"],
     selector: params["selector"]
-  }).to_json
-end
-
-post '/check' do
-  # params = JSON.parse(request.body.read)
-  article = Article.fetch(params["url"], {
-    format: 'html', selector: params["selector"]
   })
-  {
-    hash: article[:hash]
-  }.to_json
+
+  content_type :json
+  if params.has_key? "md5"
+    # require 'pry'; binding.pry
+    if params[:md5] == article.md5
+      return { md5: article.md5 }.to_json
+    end
+  end
+  article.as_json
 end
