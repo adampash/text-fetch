@@ -9,7 +9,9 @@ configure do
 end
 
 post '/' do
-  params["selector"] = nil if params["selector"].strip.empty?
+  unless params["selector"].nil?
+    params["selector"] = nil if params["selector"].strip.empty?
+  end
   puts params
   article = Article.fetch(params["url"], {
     format: params["format"],
